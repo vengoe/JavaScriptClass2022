@@ -1,0 +1,18 @@
+   
+    #container{ 
+        width: 970;
+        padding: 10px;}
+    h1{ 
+        width: 950px;
+        padding: 10px;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        border: 5cm;}
+    h2{
+        width: 950px;
+        padding: 10px;
+        background-color: rgb(255, 255, 255);
+        text-align: left;}
+    img{
+        border: 5px rgb(255, 255, 255);}
+    body{background-image: url(/Assignment4/images/hollow-knight-11-920x518.jpeg);}
