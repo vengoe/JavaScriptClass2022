@@ -5,8 +5,7 @@ body{font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-ser
     justify-content: center;
     color: white;}
 #container{
-    width: 1250px;
-    height: 750px;
+    width: 1000px;
     border: 4px solid rgb(247, 247, 247);}
 header{
     width: 100%;
