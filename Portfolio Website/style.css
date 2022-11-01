@@ -15,8 +15,13 @@ nav{
     height: 50px;}
 article{
     width: 100%;
-    height: 30%;
+    height: 20%;
     border: 4px solid rgb(255, 255, 255);}
+footer{
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;}
 .game-info{
     width: 450px;
     float: right;
@@ -54,9 +59,3 @@ article{
 .btn:hover{
     background: rgb(255, 255, 255);
     color: rgb(67, 66, 66);}
-    footer{
-        width: 100%;
-    height: 30%;
-    border: 4px solid rgb(255, 255, 255);
-        text-align: center;
-        line-height: 100%;}
