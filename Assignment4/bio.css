@@ -1,4 +1,6 @@
-   
+    body{
+        background-image: url(/Assignment4/images/hollow-knight-11-920x518.jpeg);
+        background-position: 20%;}
     #container{ 
         width: 970;
         padding: 10px;}
@@ -15,4 +17,4 @@
         text-align: left;}
     img{
         border: 5px rgb(255, 255, 255);}
-    body{background-image: url(/Assignment4/images/hollow-knight-11-920x518.jpeg);}
+    
