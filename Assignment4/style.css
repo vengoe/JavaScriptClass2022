@@ -1,9 +1,9 @@
 body{font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-image: url(images/1184118.jpeg);
-    background-position: center center;
-    background-repeat: no repeat;
-    background-size: 100%;
-    height: 100%;}
+    background-position: 10%;
+    display: flex;
+    justify-content: center;
+    color: white;}
 #container{
     width: 1000px;
     border: 4px solid rgb(247, 247, 247);}
