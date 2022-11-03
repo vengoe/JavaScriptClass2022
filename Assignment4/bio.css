@@ -2,8 +2,6 @@
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         background-image: url(/Assignment4/images/ezgif-1-cb45aa8681.jpg);
         background-position: 10%;
-        display: flex;
-        justify-content: center;
         color: white;}
     #container{ 
         width: 970px;
