@@ -1,7 +1,7 @@
     body{
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         background-image: url(/Assignment4/images/hollow-knight-11-920x518.jpeg);
-        background-position: 10%;
+        background-position: 100%;
         color:  white;}
     #container{ 
         width: 970px;
@@ -11,14 +11,14 @@
         padding: 10px;
         text-align: center;
         background-color: rgb(255, 255, 255);
-        border: 5cm;
-        color: rgb(94, 94, 94);}
+        
+        color: white}
     h2{
         width: 950px;
         padding: 10px;
         background-color: rgb(255, 255, 255);
         text-align: left;
-        color: rgb(94, 94, 94);}
+        color: white}
     img{
         border: 5px rgb(255, 255, 255);}
     
