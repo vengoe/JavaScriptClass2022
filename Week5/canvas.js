@@ -28,7 +28,8 @@ ctx.lineTo(800,0);
 ctx.stroke();
 
 ctx.beginPath();
-ctx.strokeStyle ="red";
+ctx.strokeStyle ="rgb(255,0,0)";
+ctx.lineWidth = "5"
 ctx.moveTo(800,600);
 ctx.lineTo(400,350);
 ctx.lineTo(0,600);
