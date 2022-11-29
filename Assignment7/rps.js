@@ -10,14 +10,17 @@ var scissors = new Image();
 var hrock = new Image();
 var hpaper = new Image();
 var hscissors = new Image();
-
-rock.src = "images/rock.jpg"
-hrock.src = "images/rock2.jpg"
-paper.src = "images/paper.jpg"
-hpaper.src = "images/paper2.jpg"
-scissors.src = "images/scissors.jpg"
-hscissors.src = "images/scissors2.jpg"
-
+var bg = new Image();
+var bg2 = new Image();    
+rock.src = "images/rock.png"
+hrock.src = "images/rock2.png"
+paper.src = "images/paper.png"
+hpaper.src = "images/paper2.png"
+scissors.src = "images/scissors.png"
+hscissors.src = "images/scissors2.png"
+bg.src = "images/background.png"
+bg2.src = "images/bg.png"
+ 
 
 var result = "Select a buttom from above to choose."
 hscissors.onload = function(){
@@ -43,19 +46,21 @@ function keyPressedUp(e){
 function draw(rock, paper, scissors, crock, cpaper, cscissors){
    if(gameOver == true){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.font = "30px Arial";
+    ctx.drawImage(bg,0,0,1000,600);
+    ctx.font = "30px Comic Sans";
     ctx.textAlign = "center";
-    ctx.fillStyle = "black";
-    ctx.fillText("Welcome Press Space to Play", canvas.width/2, 100);
+    ctx.fillStyle = "White";
+    
     return;
     //if i wanted to add a background image it would go there
    }
 
    //clear canvas
    ctx.clearRect(0, 0, canvas.width, canvas.height);
-   ctx.font = "30px Arial";
+   ctx.drawImage(bg2,0,0,1000,600);
+   ctx.font = "30px Comic Sans";
    ctx.textAlign = "center";
-   ctx.fillStyle = "black";
+   ctx.fillStyle = "White";
    ctx.drawImage(rock, canvas.width/2 - rock.width/2 - 100, 150);
    ctx.drawImage(paper, canvas.width/2 - paper.width/2, 150);
    ctx.drawImage(scissors, canvas.width/2 - scissors.width + 100, 150);
