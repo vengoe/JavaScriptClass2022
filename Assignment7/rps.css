@@ -1,0 +1,9 @@
+html,body{
+    display: flex;
+    justify-content: center;
+}
+canvas{
+    border:1px solid rgb(255, 0, 0);
+}
+body{ font-family: 'Nerko One', cursive;
+    color: rgb(95, 192, 225);}

@@ -4,24 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock, Paper, Scissors Demo</title>
+    <title>Rock, Paper, Scissors</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Stick+No+Bills&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="rps.css">
     <style>
-
-        html,body{
-            display: flex;
-            justify-content: center;
-        }
-        canvas{
-            border:1px solid black;
-        }
-        body{ font-family: squid;
-            color: rgb(95, 192, 225);}
-        
-    </style>
-
+        @import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
+        </style>
 </head>
 <body>
     <div id="container">
@@ -35,5 +25,7 @@
         <canvas id="c" width="1000" height="600"></canvas>
     </div>
 <script src="rps.js"></script>
+<!--Added Health bar with progress-->
+<progress id="health" value="100" max="100"></progress>
 </body>
 </html>

@@ -1,8 +1,12 @@
 //canvas stuff
 var canvas = document.getElementById('c');
 var ctx = canvas.getContext("2d");
-
-
+//progress
+var progress = document.getElementById(health);
+var ctx = canvas.getContext("2d");
+//Health bar
+var health = "healthBar"
+var healthBar = 100;
 //create instances for images rps
 var rock = new Image();
 var paper = new Image();
@@ -35,14 +39,31 @@ var gameOver = true;
 function keyPressedDown(e){
     console.log(e.keyCode);
 }
+
 function keyPressedUp(e){
     console.log(e.keyCode);
     if(e.keyCode == 32){
         gameOver = false;
         draw(rock, paper, scissors, rock, paper, scissors);
     }
+    //TRIED TO MAKE A RESET HERE BELOW
+    if(health.value <=0){
+        restartGame();
+    }
 }
-
+function restartGame(){
+    location.reload();
+}
+function drawResults(){
+    if(healthBar <= 0){
+    ctx.save()
+    ctx.fillStyle = "black";
+    ctx.font = "25px Arial"
+    ctx.textAlign = "center";
+    ctx.fillText("You Lose, Press Space to Try Again", canvas.width/2, canvas.height/2);
+    ctx.restore();}
+}
+//TRIED AGAIN BUT FAILED
 function draw(rock, paper, scissors, crock, cpaper, cscissors){
    if(gameOver == true){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -54,11 +75,11 @@ function draw(rock, paper, scissors, crock, cpaper, cscissors){
     return;
     //if i wanted to add a background image it would go there
    }
-
+   
    //clear canvas
    ctx.clearRect(0, 0, canvas.width, canvas.height);
    ctx.drawImage(bg2,0,0,1000,600);
-   ctx.font = "30px Comic Sans";
+   ctx.font = "30px Nerko One";
    ctx.textAlign = "center";
    ctx.fillStyle = "White";
    ctx.drawImage(rock, canvas.width/2 - rock.width/2 - 100, 150);
@@ -69,9 +90,7 @@ function draw(rock, paper, scissors, crock, cpaper, cscissors){
    ctx.drawImage(crock, canvas.width/2 - rock.width/2 - 100, 375);
    ctx.drawImage(cpaper, canvas.width/2 - paper.width/2, 375);
    ctx.drawImage(cscissors, canvas.width/2 - scissors.width + 100, 375);
-
    ctx.fillText(result, canvas.width/2, 525);
-   
 }
 
 // ctx.font = "40px squid";
@@ -105,8 +124,10 @@ document.getElementById("scissors").addEventListener("click", function (e) {
     //alert("You Clicked " + rps[2]);
     playGame(rps[2]);
 });
-
-function playGame(playerChoice) {
+function restartGame(){
+    location.reload();
+}
+function playGame(playerChoice){
     if(gameOver == true){
         return;
     }
@@ -122,6 +143,8 @@ function playGame(playerChoice) {
                 draw(hrock, paper, scissors, hrock, paper, scissors);
             }
             else if (cpuChoice == 1) {
+                let health = document.getElementById("health")
+                health.value -= 25;
                 //alert('CPU chose Paper, You lose!');
                 result = "CPU chose Paper. CPU Wins"
                 draw(hrock, paper, scissors, rock, hpaper, scissors);
@@ -148,16 +171,19 @@ function playGame(playerChoice) {
                 draw(rock, hpaper, scissors, rock, hpaper, scissors);
             }
             else {
+                let health = document.getElementById("health")
+                health.value -= 25;
                 //alert("CPU chose Scissors. You lose!");
                 result = "CPU chose Scissors. CPU Wins"
                 draw(rock, hpaper, scissors, rock, paper, hscissors);
             }
             break;
     }
-
     switch (playerChoice) {
         case "Scissors":
             if (cpuChoice == 0) {
+                let health = document.getElementById("health")
+                health.value -= 25;
                 //its a tie
                 //alert('CPU chose Rock. You lose!');
                 result = "CPU chose Rock. CPU Wins"
@@ -175,5 +201,6 @@ function playGame(playerChoice) {
             }
             break;
     }
-
 }
+
+

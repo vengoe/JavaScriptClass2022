@@ -129,7 +129,9 @@ function runStartTimer(){
         seconds -= 1;
     }
 }
-
+function restartGame(){
+    location.reload();
+}
 function drawStartTimer(){
     if(seconds > 0){
         ctx.save();
