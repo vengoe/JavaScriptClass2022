@@ -47,10 +47,11 @@ function keyPressedUp(e){
         draw(rock, paper, scissors, rock, paper, scissors);
     }
     //TRIED TO MAKE A RESET HERE BELOW
+
     if(health.value <=0){
         restartGame();
     }
-}
+}   
 function restartGame(){
     location.reload();
 }
