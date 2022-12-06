@@ -52,20 +52,6 @@ function keyPressedUp(e){
         restartGame();
     }
 }
-function restartGame(){
-    location.reload();
-}
-function drawResults(){
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(bg2,0,0,1000,600);
-    ctx.save()
-    ctx.fillStyle = "black";
-    ctx.font = "30px Nerko One"
-    ctx.textAlign = "center";
-    ctx.fillText("You Lose, Please Refresh to Try Again", canvas.width/2, canvas.height/2);
-    
-
-}
 //TRIED AGAIN BUT FAILED
 function draw(rock, paper, scissors, crock, cpaper, cscissors){
    if(gameOver == true){
@@ -99,7 +85,18 @@ function draw(rock, paper, scissors, crock, cpaper, cscissors){
    }
 
 }
-
+function restartGame(){
+    location.reload();
+}
+function drawResults(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(bg2,0,0,1000,600);
+    ctx.save()
+    ctx.fillStyle = "black";
+    ctx.font = "30px Nerko One"
+    ctx.textAlign = "center";
+    ctx.fillText("You Lose, Please Refresh to Try Again", canvas.width/2, canvas.height/2);
+}
 // ctx.font = "40px squid";
 // ctx.fillStyle = "purple";
 // ctx.srokeStyle = "yellow";
