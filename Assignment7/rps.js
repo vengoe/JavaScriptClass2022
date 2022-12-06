@@ -63,6 +63,7 @@ function drawResults(){
     ctx.font = "30px Nerko One"
     ctx.textAlign = "center";
     ctx.fillText("You Lose, Please Refresh to Try Again", canvas.width/2, canvas.height/2);
+    ctx.restore();
     
 
 }
