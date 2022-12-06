@@ -23,7 +23,7 @@ hpaper.src = "images/paper2.png"
 scissors.src = "images/scissors.png"
 hscissors.src = "images/scissors2.png"
 bg.src = "images/background.png"
-bg2.src = "images/bg.png"
+bg2.src = "images/Bg.png"
  
 
 var result = "Select a buttom from above to choose."
