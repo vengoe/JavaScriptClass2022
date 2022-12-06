@@ -57,23 +57,23 @@ function restartGame(){
 }
 function drawResults(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(bg,0,0,1000,600);
+    ctx.drawImage(bg2,0,0,1000,600);
     ctx.save()
     ctx.fillStyle = "black";
-    ctx.font = "25px Arial"
+    ctx.font = "30px Nerko One"
     ctx.textAlign = "center";
-    ctx.fillText("You Lose, Press Space to Try Again", canvas.width/2, canvas.height/2);
-    ctx.restore();
+    ctx.fillText("You Lose, Please Refresh to Try Again", canvas.width/2, canvas.height/2);
+    
+
 }
 //TRIED AGAIN BUT FAILED
 function draw(rock, paper, scissors, crock, cpaper, cscissors){
    if(gameOver == true){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(bg,0,0,1000,600);
-    ctx.font = "30px Comic Sans";
+    ctx.font = "30px Nerko One";
     ctx.textAlign = "center";
     ctx.fillStyle = "White";
-    
     return;
     //if i wanted to add a background image it would go there
    }
@@ -97,6 +97,7 @@ function draw(rock, paper, scissors, crock, cpaper, cscissors){
    if(document.getElementById("health").value <=0){
     drawResults();
    }
+
 }
 
 // ctx.font = "40px squid";
