@@ -38,6 +38,7 @@ var gameOver = true;
 
 function keyPressedDown(e){
     console.log(e.keyCode);
+
 }
 
 function keyPressedUp(e){
@@ -45,23 +46,23 @@ function keyPressedUp(e){
     if(e.keyCode == 32){
         gameOver = false;
         draw(rock, paper, scissors, rock, paper, scissors);
-    }
-    //TRIED TO MAKE A RESET HERE BELOW
     if(health.value <=0){
         restartGame();
+    }
     }
 }
 function restartGame(){
     location.reload();
 }
 function drawResults(){
-    if(healthBar <= 0){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(bg,0,0,1000,600);
     ctx.save()
     ctx.fillStyle = "black";
     ctx.font = "25px Arial"
     ctx.textAlign = "center";
     ctx.fillText("You Lose, Press Space to Try Again", canvas.width/2, canvas.height/2);
-    ctx.restore();}
+    ctx.restore();
 }
 //TRIED AGAIN BUT FAILED
 function draw(rock, paper, scissors, crock, cpaper, cscissors){
@@ -91,6 +92,10 @@ function draw(rock, paper, scissors, crock, cpaper, cscissors){
    ctx.drawImage(cpaper, canvas.width/2 - paper.width/2, 375);
    ctx.drawImage(cscissors, canvas.width/2 - scissors.width + 100, 375);
    ctx.fillText(result, canvas.width/2, 525);
+   console.log(document.getElementById("health").value , healthBar)
+   if(document.getElementById("health").value <=0){
+    drawResults();
+   }
 }
 
 // ctx.font = "40px squid";

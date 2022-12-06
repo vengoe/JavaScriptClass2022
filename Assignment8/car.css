@@ -1,0 +1,6 @@
+html,body{
+    display: flex;
+    justify-content: center;
+}
+body{ font-family: 'Nerko One', cursive;
+    color: rgb(95, 192, 225);}
