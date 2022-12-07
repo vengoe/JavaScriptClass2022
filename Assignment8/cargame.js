@@ -10,7 +10,7 @@ var car = new PlayerCar();
 
 //car variable to make it move
 var carPos = 2;
-var startFuel = randomNumber(canvas.width, 900);
+var startFuel = randomNumber(785, 900);
 var fuel = startFuel;
 var fuelBarWidth = 512;
 var speed = 5;
@@ -30,10 +30,17 @@ carSprite.src = "images/car.png"
 var bg = new Image()
 bg.src = "images/track.jpeg"
 
-
 carSprite.onload = function(){
     main();
     //tried adding boundary to stop car from going off screen here
+    this.carSprite = function(){
+        this.x += this.vx;
+        this.y += this.vy;
+        } 
+        if(this.x > canvas.width - this.width/2){
+            this.x = canvas.width - this.width/2;
+            this.vx = 0;
+        }
 }
 //add the event handler for starting the game
 document.addEventListener("keydown", pressSpace);
