@@ -27,7 +27,7 @@ bg2.src = "images/bg.png"
  
 
 var result = "Select a buttom from above to choose."
-hscissors.onload = function(){
+bg.onload = function(){
     draw(rock, paper, scissors, rock, paper, scissors);
 }
 
@@ -48,7 +48,8 @@ function keyPressedUp(e){
         draw(rock, paper, scissors, rock, paper, scissors);
     }
     //TRIED TO MAKE A RESET HERE BELOW
-    if(health.value <=0){
+    if(document.getElementById("health").value <=0){
+       drawResults();
         restartGame();
     }
 }
@@ -62,7 +63,8 @@ function drawResults(){
     ctx.fillStyle = "black";
     ctx.font = "30px Nerko One"
     ctx.textAlign = "center";
-    ctx.fillText("You Lose, Please Refresh to Try Again", canvas.width/2, canvas.height/2);
+    ctx.fillText("You Lose, Press Space to Try Again", canvas.width/2, canvas.height/2);
+    
     ctx.restore();
     
     
@@ -99,6 +101,7 @@ function draw(rock, paper, scissors, crock, cpaper, cscissors){
    console.log(document.getElementById("health").value , healthBar)
    if(document.getElementById("health").value <=0){
     drawResults();
+    
    }
 
 }
