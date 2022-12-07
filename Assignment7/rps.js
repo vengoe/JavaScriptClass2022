@@ -43,7 +43,7 @@ function keyPressedDown(e){
 
 function keyPressedUp(e){
     console.log(e.keyCode);
-    if(e.keyCode == 32){
+    if(e.keyCode == 32 && gameOver){
         gameOver = false;
         draw(rock, paper, scissors, rock, paper, scissors);
     }
@@ -65,7 +65,9 @@ function drawResults(){
     ctx.fillText("You Lose, Please Refresh to Try Again", canvas.width/2, canvas.height/2);
     ctx.restore();
     
-
+    
+    
+    
 }
 //TRIED AGAIN BUT FAILED
 function draw(rock, paper, scissors, crock, cpaper, cscissors){
