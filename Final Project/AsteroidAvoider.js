@@ -4,9 +4,12 @@ var timer = requestAnimationFrame(main);
 var gameOver = true;
 var gameState = []
 var currentState = 0
+//asteroid
+var asteroidSprite = new Image()
+asteroidSprite.src = "images/Asteroid.png"
 //ship
-//var Ship = new Image();
-//Ship.src = "images/SpaceShip"
+var shipSprite = new Image();
+shipSprite.src = "images/Ship.png"
 //score variable
 var score = 0
 var highScore = 0
@@ -16,7 +19,7 @@ var ship = new PlayerShip();
 
 
 function PlayerShip(){
-    //ctx.drawImage(ship,0,0,1000,800);
+    
     this.x = canvas.width/2; 
     this.y = canvas.height/2; 
     this.width = 20; 
@@ -29,14 +32,10 @@ function PlayerShip(){
     this.vy = 0;
     //for the actual ship
     this.drawShip = function(){
+       
         ctx.save();
         ctx.translate(this.x,this.y);
-        ctx.fillStyle = "red";
-        ctx.beginPath();
-        ctx.moveTo(0,-10);
-        ctx.lineTo(10,10);
-        ctx.lineTo(-10,10);
-        ctx.lineTo(0,-10);
+        ctx.drawImage(shipSprite,0,0,50,50);
         ctx.closePath();
         ctx.fill();
         ctx.restore();
@@ -182,20 +181,14 @@ var asteroids = [];
 //class for asteriod objects
 function Asteroid(){
     this.radius = randomRange(15,2);
-    this.x = randomRange(-canvas.width - this.radius, this.radius);
-    this.y = randomRange(-canvas.height - this.radius, this.radius)-canvas.height;
+    this.x = randomRange(-canvas.width + this.radius, this.radius);
+    this.y = randomRange(-canvas.height + this.radius, this.radius)-canvas.height;
     this.vy = randomRange(10,5);
-    this.color = "white";
+    this.color = "black";
 
     this.drawAsteroid = function(){
         //commands to draw Asteroids
-        ctx.save();
-        ctx.beginPath();
-        ctx.fillStyle = this.color;
-        ctx.arc(-this.y,-this.x,this.radius, 0, Math.PI * 2, true);
-        ctx.closePath();
-        ctx.fill();
-        ctx.restore();
+        ctx.drawImage(asteroidSprite,-this.y,-this.x,50,50);
     }
 }
 
@@ -230,11 +223,11 @@ function scoreTimer(){
         score++;
 
         //adding this to make the game harder by adding more asteroids
-        if(score %10 == 0){
-            numAsteroids += 10;
+        if(score %5 == 0){
+            numAsteroids += 20;
             console.log(numAsteroids);
         }
-        setTimeout(scoreTimer, 900)
+        setTimeout(scoreTimer, 1000)
     }
 }
 
@@ -324,7 +317,7 @@ gameState[2] = function(){
         highScore = score;
         ctx.save();
         ctx.font = "30px Arial";
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "Black";
         ctx.textAlign = "center";
         ctx.fillText("Game Over, your score was: " + score.toString(), canvas.width/2, canvas.height/2 - 60);
         ctx.fillText("Your new high score is: " + highScore.toString(), canvas.width/2, canvas.height/2 - 30);
@@ -337,7 +330,7 @@ gameState[2] = function(){
         //regular high score
         ctx.save();
         ctx.font = "30px Arial";
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "Black";
         ctx.textAlign = "center";
         ctx.fillText("Game Over, your score was: " + score.toString(), canvas.width/2, canvas.height/2 - 60);
         ctx.fillText("Your High Score is: " + highScore.toString(), canvas.width/2, canvas.height/2 - 30);
