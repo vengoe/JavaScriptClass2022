@@ -10,13 +10,16 @@ asteroidSprite.src = "images/Asteroid.png"
 //ship
 var shipSprite = new Image();
 shipSprite.src = "images/Ship.png"
+//canvas backgrounjd
+var bgSprite = new Image();
+bgSprite.src = "images/canvasbackground.webp"
 //score variable
 var score = 0
 var highScore = 0
 //ship variables
 var ship = new PlayerShip();
 
-
+bgSprite.onload = function(){}
 
 function PlayerShip(){
     
@@ -184,7 +187,7 @@ function Asteroid(){
     this.x = randomRange(-canvas.width + this.radius, this.radius);
     this.y = randomRange(-canvas.height + this.radius, this.radius)-canvas.height;
     this.vy = randomRange(10,5);
-    this.color = "black";
+    this.color = "White";
 
     this.drawAsteroid = function(){
         //commands to draw Asteroids
@@ -224,7 +227,7 @@ function scoreTimer(){
 
         //adding this to make the game harder by adding more asteroids
         if(score %5 == 0){
-            numAsteroids += 20;
+            numAsteroids += 5;
             console.log(numAsteroids);
         }
         setTimeout(scoreTimer, 1000)
@@ -237,11 +240,11 @@ function scoreTimer(){
 //main menu
 gameState[0] = function(){
     ctx.save();
-    ctx.font = '30px Arial';
+    ctx.font = '30px Nerko One';
     ctx.fillStyle= "white"
     ctx.textAlign = "center"
     ctx.fillText("Asteroids Avoider", canvas.width/2, canvas.height/2 - 30);
-    ctx.font - "15px Arial";
+    ctx.font - "15px Nerko One";
     ctx.fillText("Press Space To Start", canvas.width/2, canvas.height/2 + 20);
     ctx.restore();
 }
@@ -251,7 +254,7 @@ gameState[0] = function(){
 gameState[1] = function(){
     //drawing a score to canvas
     ctx.save();
-    ctx.font = "15px Arial";
+    ctx.font = "15px Nerko One";
     ctx.fillStyle = 'White';
     ctx.fillText("Score: " + score.toString(), canvas.width -150, 30);
 
@@ -289,17 +292,17 @@ gameState[1] = function(){
             //clears asteroids from screem in game over menu
             return;
         }
-        
+        //need to add neg sign to make asteroids spawn after 
         if(asteroids[i].y > canvas.height + asteroids[i].radius){
-            asteroids[i].x = randomRange(canvas.width - asteroids[i].radius, asteroids[i].radius)
-            asteroids[i].y = randomRange(canvas.height - asteroids[i].radius, asteroids[i].radius) - canvas.height;
+            asteroids[i].y = randomRange(canvas.width + asteroids[i].radius, asteroids[i].radius)
+            asteroids[i].y = -randomRange(canvas.height + asteroids[i].radius, asteroids[i].radius) - canvas.height;
 
         }
         //draw asteroids
         asteroids[i].y += asteroids[i].vy;
         asteroids[i].drawAsteroid();
 
-
+ 
     }
     //ship drawn below :
     ship.drawShip();
@@ -316,25 +319,25 @@ gameState[2] = function(){
         //new high score
         highScore = score;
         ctx.save();
-        ctx.font = "30px Arial";
-        ctx.fillStyle = "Black";
+        ctx.font = "30px Nerko One";
+        ctx.fillStyle = "White";
         ctx.textAlign = "center";
         ctx.fillText("Game Over, your score was: " + score.toString(), canvas.width/2, canvas.height/2 - 60);
         ctx.fillText("Your new high score is: " + highScore.toString(), canvas.width/2, canvas.height/2 - 30);
-        ctx.fillText("New Record: ", canvas.width/2, canvas.height/2);
-        ctx.font = "15px Arial";
+        ctx.fillText("New Record! ", canvas.width/2, canvas.height/2);
+        ctx.font = "15px Nerko One";
         ctx.fillText("Press Space to Play Again ", canvas.width/2, canvas.height/2 + 20);
         ctx.restore();
         
     }else{
         //regular high score
         ctx.save();
-        ctx.font = "30px Arial";
-        ctx.fillStyle = "Black";
+        ctx.font = "30px Nerko One";
+        ctx.fillStyle = "White";
         ctx.textAlign = "center";
         ctx.fillText("Game Over, your score was: " + score.toString(), canvas.width/2, canvas.height/2 - 60);
         ctx.fillText("Your High Score is: " + highScore.toString(), canvas.width/2, canvas.height/2 - 30);
-        ctx.font = "15px Arial";
+        ctx.font = "15px Nerko One";
         ctx.fillText("Press Space to Play Again ", canvas.width/2, canvas.height/2 + 20);
         ctx.restore();
     }
@@ -342,7 +345,7 @@ gameState[2] = function(){
 }
 function main(){
     //clears canvas
-    ctx.clearRect(0,0,canvas.width, canvas.height);
+    ctx.drawImage(bgSprite,0,0,1000,900);
     //drawing ship
     //ctx.drawImage(Ship,0,0,1000,800);
     gameState[currentState]();
