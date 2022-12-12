@@ -10,9 +10,18 @@ asteroidSprite.src = "images/Asteroid.png"
 //ship
 var shipSprite = new Image();
 shipSprite.src = "images/Ship.png"
-//canvas backgrounjd
+//canvas background
 var bgSprite = new Image();
 bgSprite.src = "images/canvasbackground.webp"
+//gameover background 
+var bg2Sprite = new Image();
+bg2Sprite.src = "images/GameOverBg.png"
+//Menu Background
+var menuSprite = new Image();
+menuSprite.src = "images/Menu.png"
+//PowerUp
+var powerSprite = new Image();
+powerSprite = "images/Invincibility.png"
 //score variable
 var score = 0
 var highScore = 0
@@ -194,6 +203,25 @@ function Asteroid(){
         ctx.drawImage(asteroidSprite,-this.y,-this.x,50,50);
     }
 }
+//Invincibility Power Up
+var numPowerUp = 1;
+var PowerUp = [];
+function PowerUp(){
+    this.x = randomRange(-canvas.width + this.radius, this.radius);
+    this.y = randomRange(-canvas.height + this.radius, this.radius)-canvas.height;
+    this.vy = randomRange(10,5)
+
+    this.drawPowerUp = function(){
+        ctx.drawImage(powerSprite,0,0,50,50)
+    }
+}
+    var distance = (this.ship, this.powerup);
+    if(detectCollision(distance, (ship.height/2 + PowerUp.radius))){
+      detectCollision = false;
+      setTimeout (scoreTimer,1000)
+      detectCollision = true
+    }
+
 
 
 
@@ -240,6 +268,7 @@ function scoreTimer(){
 //main menu
 gameState[0] = function(){
     ctx.save();
+    ctx.drawImage(menuSprite,0,0,canvas.width,canvas.height)
     ctx.font = '30px Nerko One';
     ctx.fillStyle= "white"
     ctx.textAlign = "center"
@@ -290,6 +319,7 @@ gameState[1] = function(){
             currentState = 2;
             main();
             //clears asteroids from screem in game over menu
+            
             return;
         }
         //need to add neg sign to make asteroids spawn after 
@@ -319,6 +349,7 @@ gameState[2] = function(){
         //new high score
         highScore = score;
         ctx.save();
+        ctx.drawImage(bg2Sprite,0,0,canvas.width,canvas.height);
         ctx.font = "30px Nerko One";
         ctx.fillStyle = "White";
         ctx.textAlign = "center";
@@ -332,6 +363,7 @@ gameState[2] = function(){
     }else{
         //regular high score
         ctx.save();
+        ctx.drawImage(bg2Sprite,0,0,canvas.width,canvas.height);
         ctx.font = "30px Nerko One";
         ctx.fillStyle = "White";
         ctx.textAlign = "center";
@@ -345,7 +377,7 @@ gameState[2] = function(){
 }
 function main(){
     //clears canvas
-    ctx.drawImage(bgSprite,0,0,1000,900);
+    ctx.drawImage(bgSprite,0,0,canvas.width,canvas.height);
     //drawing ship
     //ctx.drawImage(Ship,0,0,1000,800);
     gameState[currentState]();
