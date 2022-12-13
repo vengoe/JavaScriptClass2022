@@ -7,7 +7,7 @@ var currentState = 0
 var seconds = 10
 //asteroid
 var asteroidSprite = new Image()
-asteroidSprite.src = "images/Asteroid.png"
+asteroidSprite.src = "images/rock.png"
 //ship
 var shipSprite = new Image();
 shipSprite.src = "images/Ship.png"
@@ -21,8 +21,8 @@ bg2Sprite.src = "images/GameOverBg.png"
 var menuSprite = new Image();
 menuSprite.src = "images/Menu.png"
 //PowerUp
-var powerSprite = new Image();
-powerSprite = "images/Invincibility.png"
+var bubbleSprite = new Image();
+bubbleSprite.src = "images/bubble.png"
 //score variable
 var score = 0
 var highScore = 0
@@ -33,7 +33,9 @@ var powerUp = true
 var spawntime = 10
 var time = 5
 var pickupTime = 5
-menuSprite.onload = function(){}
+menuSprite.onload = function(){
+    main()
+}
 
 function PlayerShip(){
     
@@ -134,10 +136,10 @@ function PlayerShip(){
                     currentState = 0;
                     numAsteroids = 20;
                     asteroids = [];
-                    score = 0;
-                    powerUp = false
-                    spawntime = 10
-                    time = 5
+                    score = 10;
+                    powerUp = true
+                    spawntime--
+                    pickupTime = 5
                     gameStart();
                     main();
 
@@ -212,28 +214,21 @@ function Asteroid(){
     }
 }
 //Invincibility Power Up
-
 function PowerUp(){
-    this.radius = randomRange(100,50);
-    this.x = randomRange(-canvas.width + this.radius, this.radius);
-    this.y = randomRange(-canvas.height + this.radius, this.radius)-canvas.height;
-    this.vy = randomRange(10,5);
-    this.color = "red";
+    this.radius = randomRange(80,30);
+    this.x = randomRange(canvas.width , canvas.height);
+    this.y = randomRange(canvas.height , canvas.width);
+    
 
     this.drawPowerUp = function(){
         //powerup keeps spawning becuase of the the ranges
-        this.x= randomRange(canvas.width,50);
-        this.y = randomRange(canvas.height,50);
-        this.radius = randomRange(15,2);
-        ctx.save();
-        ctx.beginPath();
-        ctx.fillStyle = this.color;
-        ctx.arc(400,400,this.radius,0,2*Math.PI,true)
-        ctx.closePath();
-        ctx.fill();
-        ctx.restore();
+       // this.x= randomRange(canvas.width,50);
+       // this.y = randomRange(canvas.height,50);
+       // this.radius = randomRange(15,2)
+        ctx.drawImage(bubbleSprite,400,400,50,50);
+   
         //this is making them spawn a lot
-        console.log();
+        
         
     }
 }
@@ -278,7 +273,7 @@ function scoreTimer(){
     if(!gameOver){
         score++;
         spawntime--
-        console.log(pickupTime)
+        console.log(spawntime)
         //adding this to make the game harder by adding more asteroids
         if(score %5 == 0){
             numAsteroids += 5;
@@ -354,24 +349,22 @@ gameState[1] = function(){
         //draw asteroids
         asteroids[i].y += asteroids[i].vy;
         asteroids[i].drawAsteroid();
+        
 
  
     }
     if(!gameOver){
     //ship drawn below :
     ship.drawShip();
-    ship.moveShip();
+    ship.moveShip();}
     if(spawntime ==0){
         pup.drawPowerUp()
-        pickupTime =10
-        if(pickupTime == 0){
-            spawntime = 10
-            pickupTime = 5
-        }
-        if(time == 0){
-            
-            spawn = 10
-        }
+        //pickupTime = 10
+       if(spawntime == -10){
+        restart()
+        setTimeout(scoretimer, 1000)
+            spawntime = 10;
+       }
     }
     }
 
@@ -381,7 +374,7 @@ gameState[1] = function(){
         //add and create new asteroids in the array
         asteroids.push(new Asteroid());
 }
-}
+
 //game over menu
 gameState[2] = function(){
     ctx.clearRect(0,0, canvas.width, canvas.height);
@@ -417,6 +410,7 @@ gameState[2] = function(){
 }
 function main(){
     //clears canvas
+    ctx.clearRect(0,0,canvas.width, canvas.height);
     ctx.drawImage(bgSprite,0,0,canvas.width,canvas.height);
     //drawing ship
     //ctx.drawImage(Ship,0,0,1000,800);
