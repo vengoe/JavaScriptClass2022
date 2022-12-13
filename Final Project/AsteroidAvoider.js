@@ -4,6 +4,7 @@ var timer = requestAnimationFrame(main);
 var gameOver = true;
 var gameState = []
 var currentState = 0
+var seconds = 10
 //asteroid
 var asteroidSprite = new Image()
 asteroidSprite.src = "images/Asteroid.png"
@@ -27,7 +28,11 @@ var score = 0
 var highScore = 0
 //ship variables
 var ship = new PlayerShip();
-
+var pup = new PowerUp()
+var powerUp = true
+var spawntime = 10
+var time = 5
+var pickupTime = 5
 menuSprite.onload = function(){}
 
 function PlayerShip(){
@@ -130,6 +135,9 @@ function PlayerShip(){
                     numAsteroids = 20;
                     asteroids = [];
                     score = 0;
+                    powerUp = false
+                    spawntime = 10
+                    time = 5
                     gameStart();
                     main();
 
@@ -204,66 +212,38 @@ function Asteroid(){
     }
 }
 //Invincibility Power Up
-var numPower = 1;
-var powerUp = [];
-function Powerup(){
-    this.radius = randomRange(15,2);
+
+function PowerUp(){
+    this.radius = randomRange(100,50);
     this.x = randomRange(-canvas.width + this.radius, this.radius);
     this.y = randomRange(-canvas.height + this.radius, this.radius)-canvas.height;
     this.vy = randomRange(10,5);
     this.color = "red";
 
-    this.drawPowerup = function(){
-        this.xa= randomRange(canvas.width,50);
+    this.drawPowerUp = function(){
+        //powerup keeps spawning becuase of the the ranges
+        this.x= randomRange(canvas.width,50);
         this.y = randomRange(canvas.height,50);
         this.radius = randomRange(15,2);
         ctx.save();
         ctx.beginPath();
         ctx.fillStyle = this.color;
-        ctx.arc(500,400,this.radius,0,2*Math.PI,true)
-        ctx.drawImage(powerSprite,0,0,50,50);
+        ctx.arc(400,400,this.radius,0,2*Math.PI,true)
         ctx.closePath();
         ctx.fill();
         ctx.restore();
-        console.log(this.x,this.y,this.radius);
+        //this is making them spawn a lot
+        console.log();
         
     }
 }
 
 
-    if(detectCollision(distance, (ship.height/2 + powerUp.radius))){
-      detectCollision = false;
-      setTimeout(scoreTimer,1000)
-      detectCollision = true
-    }
+   
+
+
     
-    for(var i = 0; i<powerUp.length; i++){
-        var dX = -ship.y - powerUp[i].x;
-        var dY = -ship.x - powerUp[i].y;
-        var distance = Math.sqrt((dX*dX)+(dY*dY));
 
-        if(detectCollision(distance, (ship.height/2 + powerUp[i].radius))){
-            var distance = (this.ship, this.powerUp);
-            if(detectCollision(distance, (ship.height/2 + powerUp.radius))){
-              detectCollision = false;
-              setTimeout (scoreTimer,1000)
-              detectCollision = true
-            
-        }
-      
-        if(powerUp[i].y > canvas.height + powerUp[i].radius){
-            powerUp[i].y = randomRange(canvas.width + powerUp[i].radius, powerUp[i].radius)
-            powerUp[i].y = -randomRange(canvas.height + powerUp[i].radius, powerUp[i].radius) - canvas.height;
-
-        }
-    
-        powerUp[i].y += powerUp[i].vy;
-        powerUp[i].drawpowerUp();
-        
-
-
-    }
-}
 
 
     if(!gameOver){
@@ -283,8 +263,10 @@ function gameStart(){
     for(var i = 0; i<numAsteroids; i++){
         asteroids[i] = new Asteroid();
     }
+   
     //create new instance of player ship
     ship = new PlayerShip();
+    pup = new PowerUp()
 }
 function randomRange(high,low){
     return Math.random() * (high-low) + low;
@@ -295,7 +277,8 @@ function detectCollision(distance, calcDistance){
 function scoreTimer(){
     if(!gameOver){
         score++;
-
+        spawntime--
+        console.log(pickupTime)
         //adding this to make the game harder by adding more asteroids
         if(score %5 == 0){
             numAsteroids += 5;
@@ -321,7 +304,6 @@ gameState[0] = function(){
     ctx.restore();
 }
 
-
 //Game Scene
 gameState[1] = function(){
     //drawing a score to canvas
@@ -329,9 +311,7 @@ gameState[1] = function(){
     ctx.font = "15px Nerko One";
     ctx.fillStyle = 'White';
     ctx.fillText("Score: " + score.toString(), canvas.width -150, 30);
-
     ctx.restore();
-
     //setup vertical movement
     if(ship.up){
         ship.vy =-10;
@@ -348,7 +328,7 @@ gameState[1] = function(){
     }
        
 
-
+ 
 
 
     for(var i = 0; i<asteroids.length; i++){
@@ -377,9 +357,26 @@ gameState[1] = function(){
 
  
     }
+    if(!gameOver){
     //ship drawn below :
     ship.drawShip();
     ship.moveShip();
+    if(spawntime ==0){
+        pup.drawPowerUp()
+        pickupTime =10
+        if(pickupTime == 0){
+            spawntime = 10
+            pickupTime = 5
+        }
+        if(time == 0){
+            
+            spawn = 10
+        }
+    }
+    }
+
+
+
     while(asteroids.height < numAsteroids){
         //add and create new asteroids in the array
         asteroids.push(new Asteroid());
