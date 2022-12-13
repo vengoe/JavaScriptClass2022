@@ -9,7 +9,7 @@ var finish = 956;
 var car = new PlayerCar();
 
 //car variable to make it move
-var carPos = 2;
+var carPos = 50;
 var startFuel = randomNumber(785, 900);
 var fuel = startFuel;
 var fuelBarWidth = 512;
@@ -104,7 +104,7 @@ function drawStartFinishLines(){
 function drawCar(){
     //ctx.fillStyle = "red";
     //ctx.fillRect(carPos,canvas.height/2,40,20);
-    ctx.drawImage(carSprite,carPos,canvas.height/2,100,100)
+    ctx.drawImage(carSprite,carPos,canvas.height/2,40,40)
 }
 
 function drawFuelBar(){
@@ -132,8 +132,8 @@ function drawFuelBar(){
         this.y += this.vy;
         if(this.x > canvas.width - this.width/2){
             this.x = canvas.width - this.width/2;
-            this.vx = 0;}}}
-        carWidth.moveCar();
+            this.vx = 0;
+        carWidth.moveCar();}}}
 function drawResults(){
     //results for the race
     if(carPos + 40 > finish){
