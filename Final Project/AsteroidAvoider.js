@@ -28,7 +28,7 @@ var highScore = 0
 //ship variables
 var ship = new PlayerShip();
 
-bgSprite.onload = function(){}
+menuSprite.onload = function(){}
 
 function PlayerShip(){
     
@@ -204,25 +204,66 @@ function Asteroid(){
     }
 }
 //Invincibility Power Up
-var numPowerUp = 1;
-var PowerUp = [];
-function PowerUp(){
+var numPower = 1;
+var powerUp = [];
+function Powerup(){
+    this.radius = randomRange(15,2);
     this.x = randomRange(-canvas.width + this.radius, this.radius);
     this.y = randomRange(-canvas.height + this.radius, this.radius)-canvas.height;
-    this.vy = randomRange(10,5)
+    this.vy = randomRange(10,5);
+    this.color = "red";
 
-    this.drawPowerUp = function(){
-        ctx.drawImage(powerSprite,0,0,50,50)
+    this.drawPowerup = function(){
+        this.xa= randomRange(canvas.width,50);
+        this.y = randomRange(canvas.height,50);
+        this.radius = randomRange(15,2);
+        ctx.save();
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.arc(500,400,this.radius,0,2*Math.PI,true)
+        ctx.drawImage(powerSprite,0,0,50,50);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+        console.log(this.x,this.y,this.radius);
+        
     }
 }
-    var distance = (this.ship, this.powerup);
-    if(detectCollision(distance, (ship.height/2 + PowerUp.radius))){
+
+
+    if(detectCollision(distance, (ship.height/2 + powerUp.radius))){
       detectCollision = false;
-      setTimeout (scoreTimer,1000)
+      setTimeout(scoreTimer,1000)
       detectCollision = true
     }
+    
+    for(var i = 0; i<powerUp.length; i++){
+        var dX = -ship.y - powerUp[i].x;
+        var dY = -ship.x - powerUp[i].y;
+        var distance = Math.sqrt((dX*dX)+(dY*dY));
+
+        if(detectCollision(distance, (ship.height/2 + powerUp[i].radius))){
+            var distance = (this.ship, this.powerUp);
+            if(detectCollision(distance, (ship.height/2 + powerUp.radius))){
+              detectCollision = false;
+              setTimeout (scoreTimer,1000)
+              detectCollision = true
+            
+        }
+      
+        if(powerUp[i].y > canvas.height + powerUp[i].radius){
+            powerUp[i].y = randomRange(canvas.width + powerUp[i].radius, powerUp[i].radius)
+            powerUp[i].y = -randomRange(canvas.height + powerUp[i].radius, powerUp[i].radius) - canvas.height;
+
+        }
+    
+        powerUp[i].y += powerUp[i].vy;
+        powerUp[i].drawpowerUp();
+        
 
 
+    }
+}
 
 
     if(!gameOver){
@@ -233,6 +274,8 @@ function PowerUp(){
         //add and create new asteroids in the array
         asteroids.push(new Asteroid());
     }
+
+
 
 
 //utility function
@@ -273,7 +316,7 @@ gameState[0] = function(){
     ctx.fillStyle= "white"
     ctx.textAlign = "center"
     ctx.fillText("Asteroids Avoider", canvas.width/2, canvas.height/2 - 30);
-    ctx.font - "15px Nerko One";
+    ctx.font - "30px Nerko One";
     ctx.fillText("Press Space To Start", canvas.width/2, canvas.height/2 + 20);
     ctx.restore();
 }
